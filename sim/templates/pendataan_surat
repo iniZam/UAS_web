@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block konten %}
+
+<div class="container">
+    <div class="jumbotron">
+        
+        <h3>Pendataan Surat</h3>
+        
+        <form method="POST">
+            <div class="container">
+               <div class="jumbotron">
+                  
+                  {{form.hidden_tag()}}
+                  <div class="form-group">
+                     {{form.kop_surat.label(class="form-control-label")}}
+                     {% if form.kop_surat.errors %}
+                  {{form.kop_surat(class="form-control is-invalid")}}
+                  <div class="invalid-feedback">
+                     {% for error in form.kop_surat.errors %}
+                     <span>{{error}}</span>
+                     {% endfor %}
+                  </div>
+               
+                  {% else %}<!--ini else-->
+                  {{form.kop_surat(class="form-control")}}
+                  
+               {% endif %}</div>
+
+               
+               <div class="form-group">
+                {{form.kategori.label(class="form-control-label")}}
+                {% if form.kategori.errors %}
+                {{form.kategori(class="form-control is-invalid")}}
+                 <div class="invalid-feedback">
+                {% for error in form.kategori.errors %}
+                     <span>{{error}}</span>
+                {% endfor %}
+                 </div>
+          
+                {% else %}
+                {{form.kategori(class="form-control")}}
+             
+                  {% endif %}
+               </div>
+
+               <!-- detail pendataan -->
+               <div class="form-group">
+                {{form.detail_surat.label(class="form-control-label")}}
+                {% if form.detail_surat.errors %}
+                {{form.detail_surat(class="form-control is-invalid")}}
+                 <div class="invalid-feedback">
+                {% for error in form.detail_surat.errors %}
+                     <span>{{error}}</span>
+                {% endfor %}
+                 </div>
+          
+                {% else %}
+                {{form.detail_surat(class="form-control")}}
+             
+                  {% endif %}
+               </div>
+
+           
+               
+               
+         
+            <div class="form-group">
+               
+               {{form.submit(class="btn btn-success")}}
+            </div>
+           
+            
+         
+            </div>
+         </div>
+         
+         </form>
+
+        

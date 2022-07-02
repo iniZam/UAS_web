@@ -2,7 +2,7 @@ from email.mime import image
 from tkinter.tix import Form
 from flask import Flask, render_template, redirect, request, url_for, Blueprint, flash
 from sim.mahasiswa.forms import Orang,login_org,Edit_org,pengaduan,edit_pengaduan
-from sim.models import Tmahasiswa, Tpengaduan
+from sim.models import Tmahasiswa, Tpengaduan, Tpendataan
 from sim import db, bcrypt,app
 from flask_login import login_user,current_user,logout_user,login_required
 import os
@@ -76,7 +76,7 @@ def edit():
         sandi = bcrypt.generate_password_hash(form.password.data).decode('UTF-8')
         current_user.password=sandi
         db.session.commit()
-        flash('Data berhasil di rubah ','warning ')
+        flash('Data berhasil di rubah ','success')
         return redirect(url_for('rmahasiswa.edit'))
     elif request.method=="GET":# ini sintak untuk menampilkan data ke dalam database
         form.npm.data=current_user.npm
@@ -112,8 +112,8 @@ def laporan():
         add_laporan = Tpengaduan(subjek=form.subjek.data,kategori=form.kategori.data,detail_pengaduan=form.detail_pengaduan.data,mahasiswa=current_user)
         db.session.add(add_laporan)
         db.session.commit()
-        flash('laporan telah diterima ','warning ')
-        return redirect(url_for('rmahasiswa.laporan'))        
+        flash('laporan telah diterima ','success')
+        return redirect(url_for('rmahasiswa.rumah'))        
        
     return render_template('laporan.html',form=form,dt_pengaduan=dt_pengaduan)
 
@@ -132,7 +132,7 @@ def edit_lapor(ed_id):# ed_id adalah id yang ada di database dan data yang di ed
         dt_pengaduan.kategori=form.kategori.data
         dt_pengaduan.detail_pengaduan=form.detail_pengaduan.data
         db.session.commit()
-        flash('Laporan telah direvisi :)','warning')
+        flash('Laporan telah direvisi :)','success')
         return redirect(url_for('rmahasiswa.laporan'))
     return render_template('editlapor.html',form=form)
 
@@ -145,3 +145,16 @@ def cabut_lapor(id):
     flash('Laporan telah sudah dicabut :)','warning')
     return redirect(url_for('rmahasiswa.laporan'))
     
+@rmahasiswa.route("/pendataan_surat", methods=['GET','POST'])
+@login_required
+def pendataan_surat():
+    dt_pendataan = Tpendataan.query.filter_by(mahasiswa_id=current_user.id)
+    form = pendataan()
+    if form.validate_on_submit(): 
+        add_pendataan = Tpendataan(kop_surat=form.kop_surat.data,kategori=form.kategori.data,detail_surat=form.detail_surat.data,mahasiswa=current_user)
+        db.session.add(add_pendataan)
+        db.session.commit()
+        flash('Data Surat Telah DiTerima','success')
+        return redirect(url_for('rmahasiswa.pendataan_surat'))        
+    return render_template('pendataan_surat.html',form=form,dt_pendataan=dt_pendataan)
+
