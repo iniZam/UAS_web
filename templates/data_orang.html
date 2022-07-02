@@ -1,0 +1,20 @@
+
+<html>
+<head>
+
+</head>
+
+
+<body>
+    <h1>Kamu Itu Setan .....!!!!!!!!!!!!</h1>
+	<h2>Data Manusia :</h2>
+    {% for data in anjay %} <!-- ini adalah statement untuk awal looping dan anjay itu kepanggil dari file part2.py di line 25 dan dia akan di isi ke dalam data -->
+    <h4>{{data.nama}}</h4> <!-- karena variabel anjay yang isinya variabel data_orang sudah di isi ke dalam data dari line sebelumnya -->
+    <h4>{{data.gender}}</h4> <!-- untuk nama,gender dan spesies itu adalah keys/kuncinya coba lihat di file part2.py line 5-13 jadi jika yang dipanggil keys/kunci maka yang bakalan datang adalah yang di sebelahnya dan itu akan terus mengulang hingga semuanya kepanggil -->
+    <h4>{{data.spesies}}</h4>
+    {% endfor %} <!-- ini adalah akhir looping (kalo di java anggap saja ini tutup kurung kuawalnya ) -->
+    
+</body>
+
+
+    </html>
