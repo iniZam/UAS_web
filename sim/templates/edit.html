@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block konten %}
-<h1>Formulir Pendaftaran </h1>
+<h1>Update Profil </h1>
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
    <div class="container"><!--ini container ini berguna agar isi webnya di tengan -->
       <div class="jumbotron"><!--jumbroton ini akan di edit fi file style.css yang ada di dalam forder static dan di dalam folder css-->
          
@@ -82,6 +82,22 @@
          {% endif %}</div>
       
       
+      {{form.hidden_tag()}}
+      <div class="form-group">
+            {{form.foto.label(class="form-control-label")}}
+            {% if form.foto.errors %}
+            {{form.foto(class="form-control is-invalid")}}
+            <div class="invalid-feedback">
+            {% for error in form.foto.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+            </div>
+   
+            {% else %}
+            {{form.foto(class="form-control")}}
+   
+      {% endif %}</div>
+         
 
    <div class="form-group">
       
@@ -97,3 +113,4 @@
 
 
 {% endblock %}
+
