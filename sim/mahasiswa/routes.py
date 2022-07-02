@@ -1,8 +1,8 @@
 from email.mime import image
 from tkinter.tix import Form
 from flask import Flask, render_template, redirect, request, url_for, Blueprint, flash
-from sim.mahasiswa.forms import Orang,login_org,Edit_org,pengaduan,edit_pengaduan,agenda_info
-from sim.models import Tmahasiswa, Tpengaduan, Agenda_info
+from sim.mahasiswa.forms import Orang,login_org,Edit_org,pengaduan,edit_pengaduan
+from sim.models import Tmahasiswa, Tpengaduan
 from sim import db, bcrypt,app
 from flask_login import login_user,current_user,logout_user,login_required
 import os
@@ -145,24 +145,3 @@ def cabut_lapor(id):
     flash('Laporan telah sudah dicabut :)','warning')
     return redirect(url_for('rmahasiswa.laporan'))
     
-
-
-
-# ini kabawa ni UAS punya
-@rmahasiswa.route("/posting", methods=['GET','POST'])
-@login_required
-def agenda_inf():
-    form = agenda_info()
-    if form.validate_on_submit(): 
-        add_agenda = Agenda_info(subjek=form.subjek.data,caption=form.caption.data)
-        db.session.add(add_agenda)
-        db.session.commit()
-        flash('Sudah di posting ','warning ')
-        return redirect(url_for('rmahasiswa.agenda_inf'))  
-    return render_template('tambahagenda.html',form=form)#, info_agenda=info_agenda)
-
-@rmahasiswa.route("/agenda", methods=['GET','POST'])
-def informasi():
-    info_agenda = Agenda_info.query.all()
-    
-    return render_template("agenda_info.html",info=info_agenda)
