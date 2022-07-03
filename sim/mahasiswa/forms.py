@@ -2,7 +2,7 @@
 from importlib.machinery import FileFinder
 from flask_login import current_user
 from flask_wtf import FlaskForm
-from wtforms import StringField,SubmitField,TextAreaField,PasswordField,EmailField, SelectField #ini akan mengimport tipe data
+from wtforms import StringField,SubmitField,TextAreaField,PasswordField,EmailField #ini akan mengimport tipe data
 from wtforms.validators import DataRequired,Length,EqualTo,Email,ValidationError
 from sim.models import Tmahasiswa
 from flask_login import current_user
@@ -63,15 +63,6 @@ class Edit_org(FlaskForm):# ini kelas tambahannya
             if cekemail:
                 raise ValidationError("ganti email da yang ini ada yang so pake")
 
-class pengaduan (FlaskForm):# semua yang di bawah ini menyesuiakan dengan yang ada di Tpengaduan di file models.py kecuali id dan tgl_post
-    subjek= StringField('Subjek ',validators=[DataRequired()])
-    kategori = SelectField ( u'kategori pengaduan',choices=[('administrasi','pelayanan Administrasi'),('Fasilitas','Fasilitas'),('dosen','dosen')],validators=[DataRequired()])# 1 itu adalah nilai yang bakalan masuk ke database dan prlayanan itu bakalan ditampilkan di html nya
-    detail_pengaduan = TextAreaField("laporan",validators=[DataRequired()])
-    submit= SubmitField('laporkan')
 
 
-class edit_pengaduan (FlaskForm):# semua yang di bawah ini menyesuiakan dengan yang ada di Tpengaduan di file models.py kecuali id dan tgl_post
-    subjek= StringField('Subjek ',validators=[DataRequired()])
-    kategori = SelectField ( u'kategori pengaduan',choices=[('administrasi','pelayanan Administrasi'),('Fasilitas','Fasilitas'),('dosen','dosen')],validators=[DataRequired()])# 1 itu adalah nilai yang bakalan masuk ke database dan prlayanan itu bakalan ditampilkan di html nya
-    detail_pengaduan = TextAreaField("laporan",validators=[DataRequired()])
-    submit= SubmitField('Ubah')
+
