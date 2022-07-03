@@ -31,14 +31,12 @@ class Tpengaduan(db.Model):
     def __repr__(self):
         return f"Tpengaduan('{self.subjek}', '{self.kategori}', {self.detail_pengaduan}', '{self.tgl_post}')"
 
-        
-class Tpendataan(db.Model):
+class Agenda_info(db.Model):
     id= db.Column(db.Integer, primary_key=True)
-    kop_surat =db.Column(db.String(100), nullable=False)
-    kategori =db.Column(db.String(100), nullable=False)
-    detail_surat =db.Column(db.String(100), nullable=False)
+    subjek =db.Column(db.String(100), nullable=False)
+    caption =db.Column(db.String(300), nullable=False)
     tgl_post = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    mahasiswa_id = db.Column (db.Integer, db.ForeignKey('tmahasiswa.id'), nullable=False)
+   
 
     def __repr__(self):
-        return f"Tpendataan('{self.kop_surat}', '{self.kategori}', {self.detail_surat}', '{self.tgl_post}')"
+        return f"Tpengaduan('{self.subjek}', '{self.caption}', , '{self.tgl_post}')"
