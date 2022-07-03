@@ -23,18 +23,13 @@
                 <a class="nav-link active" aria-current="page" href="{{url_for("rmahasiswa.rumah")}}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{url_for("rmahasiswa.informasi")}}">Informasi</a>
+                <a class="nav-link" href="{{url_for("rmahasiswa.tentang")}}">Tentang</a>
               </li>
-
-
               
-              {% if current_user.is_authenticated %}       
-              <li class="nav-item">
-                <a class="nav-link" href="{{url_for("rmahasiswa.agenda_inf")}}">Posting</a>
-              </li>
-              {% else %}
               <li class="nav-item">
                   <a class="nav-link" href="{{url_for("rmahasiswa.daftar")}}">Daftar</a></li>
+              {% if current_user.is_authenticated %}       
+              {% else %}
               <!-- ini akan ditampilkan saaat tidak login -->
               <li class="nav-item">
                   <a class="nav-link" href="{{url_for("rmahasiswa.login")}}">Login</a></li>
@@ -63,18 +58,15 @@
           <div class="col-md-8"><!--jika di atas itu baris maka yang ini adalah kolomnya dan kolom itu batasnya 12-->
             <div class="shadow p-3 mb-5 bg- rounded">
               <!-- flash -->
-               {% with messages= get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                    {% for category, message in messages %}
-
-                    <div class="alert alert-{{category}}">
-                        {{message}}
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-                    {% endwith %}
-              
-              
+              {% with messages= get_flashed_messages(with_categories = true) %}
+              {% if messages %}
+              {% for category, message in messages %}
+              <div class="alert alert-{{category}} "></div>
+                      {{message}}
+              {% endfor %}
+              {% endif %}
+              {% endwith %}
+  
               {% block konten %}
               
               {% endblock %}
@@ -102,6 +94,7 @@
               <a href="{{url_for('rmahasiswa.keluar')}}" class="card-link">Keluar</a>
             </div>
           </div>
+          
           {% else %}
           
           <h1>Menu Lain</h1>         
